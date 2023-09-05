@@ -11,6 +11,13 @@ services:
     user: "root"
     volumes:
       - "./storage:/home/runner"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
     command: "chown -R runner:runner /home/runner"
 
   comfyui:
