@@ -43,7 +43,7 @@ RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \
 
 COPY --chown=runner:runner scripts/. /home/scripts/
 
-RUN bash /home/scripts/test.sh
+RUN /home/scripts/test.sh
 
 USER runner:runner
 VOLUME /home/runner
