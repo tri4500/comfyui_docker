@@ -43,9 +43,7 @@ RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \
 
 COPY --chown=runner:runner scripts/. /home/scripts/
 
-COPY ./test.py /home/test.py
-
-RUN python3 /home/test.py
+RUN bash /home/scripts/test.sh
 
 USER runner:runner
 VOLUME /home/runner
