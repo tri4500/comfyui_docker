@@ -21,7 +21,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: "yanwk/comfyui-boot"
+    image: "trihd4500/comfy_ui:0.1"
     ports:
       - "8188:8188"
     volumes:
