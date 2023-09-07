@@ -2,7 +2,7 @@ FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
 RUN --mount=type=cache,target=/var/cache/apt \
     set -eu \
-    && apt update && apt upgrade -y && apt install -y \
+    && apt-get update && apt update && apt upgrade -y && apt install -y \
         python3.10 python3.10-dev python3-pip python-is-python3 \
         shadow git aria2 \
         Mesa-libGL1
