@@ -1,3 +1,8 @@
+################################################################################
+# Dockerfile that builds 'yanwk/comfyui-boot:latest'
+# A runtime environment for https://github.com/comfyanonymous/ComfyUI
+################################################################################
+
 FROM opensuse/tumbleweed:latest
 
 LABEL maintainer="code@yanwk.fun"
