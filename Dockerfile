@@ -1,16 +1,16 @@
-FROM opensuse/tumbleweed:latest
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
-RUN --mount=type=cache,target=/var/cache/zypp \
+RUN --mount=type=cache,target=/var/cache/apt \
     set -eu \
-    && zypper install --no-confirm \
-        python310 python310-pip \
+    && apt update && apt upgrade -y && apt install -y \
+        python3.10 python3.10-dev python3-pip python-is-python3 \
         shadow git aria2 \
         Mesa-libGL1
 
 # Install PyTorch nightly
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install wheel setuptools numpy \
-    && pip install --pre torch torchvision \
+    pip install ninja wheel setuptools numpy \
+    && pip install --pre torch torchvision --force-reinstall \
         --index-url https://download.pytorch.org/whl/nightly/cu118 
 
 # Install xFormers from wheel file we just compiled
