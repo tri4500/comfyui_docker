@@ -7,7 +7,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: "yanwk/comfyui-boot"
+    image: "trihd4500/comfy_ui:0.1"
     user: "root"
     volumes:
       - "./storage:/home/runner"
