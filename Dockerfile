@@ -1,6 +1,6 @@
-FROM opensuse/tumbleweed:latest
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
-RUN --mount=type=cache,target=/var/cache/zypp \
+RUN --mount=type=cache,target=/var/cache/apt \
     set -eu \
     && zypper install --no-confirm \
         python310 python310-pip \
@@ -9,7 +9,7 @@ RUN --mount=type=cache,target=/var/cache/zypp \
 
 # Install PyTorch nightly
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install wheel setuptools numpy \
+    apt update && pip install wheel setuptools numpy \
     && pip install --pre torch torchvision \
         --index-url https://download.pytorch.org/whl/nightly/cu118 
 
