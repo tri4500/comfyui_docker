@@ -1,16 +1,18 @@
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+FROM opensuse/tumbleweed:latest
 
-RUN --mount=type=cache,target=/var/cache/apt \
+LABEL maintainer="code@yanwk.fun"
+
+RUN --mount=type=cache,target=/var/cache/zypp \
     set -eu \
-    && apt-get update && apt update && apt upgrade -y && apt install -y \
-        python3.10 python3.10-dev python3-pip python-is-python3 \
+    && zypper install --no-confirm \
+        python310 python310-pip \
         shadow git aria2 \
         Mesa-libGL1
 
 # Install PyTorch nightly
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install ninja wheel setuptools numpy \
-    && pip install --pre torch torchvision --force-reinstall \
+    pip install wheel setuptools numpy \
+    && pip install --pre torch torchvision \
         --index-url https://download.pytorch.org/whl/nightly/cu118 
 
 # Install xFormers from wheel file we just compiled
@@ -42,10 +44,6 @@ RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \
     && chown runner:runner /home/runner /home/scripts
 
 COPY --chown=runner:runner scripts/. /home/scripts/
-
-COPY ./test.py /home/test.py
-
-RUN /home/scripts/test.sh
 
 USER runner:runner
 VOLUME /home/runner
