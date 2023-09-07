@@ -24,7 +24,7 @@ services:
     volumes:
       - "./storage:/home/runner"
     environment:
-      - CLI_ARGS=
+      - CLI_ARGS= "--listen"
     deploy:
       resources:
         reservations:
